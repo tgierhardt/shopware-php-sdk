@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Vin\ShopwareSdk\Client;
 
+use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\TransferException;
@@ -15,9 +16,7 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\ClientTrait as GuzzleClientTrait;
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use Psr\Http\Message\UriInterface;
 
 class Client implements ClientInterface
