@@ -10,10 +10,13 @@ class SyncService extends ApiService
 {
     private const SYNC_ENDPOINT = '/api/_action/sync';
 
-    public function sync(SyncPayload $payload, array $additionalParams = [], array $additionalHeaders = []): ApiResponse
+    private const SYNC_ENDPOINT_V3 = '/api/v3/_action/sync';
+
+    public function sync(SyncPayload $payload, array $additionalParams = [], array $additionalHeaders = [], ?string $apiVersion = null): ApiResponse
     {
         try {
-            $response = $this->httpClient->post($this->getFullUrl(self::SYNC_ENDPOINT), [
+            $endpoint = ($apiVersion == '3' || $apiVersion == 'v3') ? self::SYNC_ENDPOINT_V3 : self::SYNC_ENDPOINT;
+            $response = $this->httpClient->post($this->getFullUrl($endpoint), [
                 'headers' => $this->getBasicHeaders($additionalHeaders),
                 'body' => json_encode(array_merge($payload->parse(), $additionalParams))
             ]);
